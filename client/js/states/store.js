@@ -14,5 +14,20 @@ class BaseStoreState extends ContinueState {
 }
 
 class StoreState extends BaseStoreState {
+	// need to update to ask how many right under the choices instead of going to another page
+	display(){
+		this.root.append("<h3> How many would you like to buy?</h3> ")
+	
+
+		this.root.append('<div id="menu" class="menu"></div>')
+
+		let button = $("<button/>")
+			.text("Done")
+			.click(() => {
+				states.pop();
+			})
+			$("#menu").append(button);
+
+	
 
 }
