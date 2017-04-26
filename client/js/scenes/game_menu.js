@@ -8,6 +8,18 @@ let changePaceState = new MenuState("Choose the pace you will travel at:", [
 	{text: "Steady (50%)", onclick: () => { party.pace = 1; states.pop() }},
 	{text: "Cancel", onclick: () => { states.pop() }}
 ])
+// prices vary depending on location 
+let openStoreState = new MenuState("You may buy: ", [
+	{text: "1. Oxen", next: new StoreState()},
+	{text: "2. Clothing", next: new StoreState()},
+	{text: "3. Ammunition",next: new StoreState()},
+	{text: "4. Wagon wheels", next: new StoreState()},
+	{text: "5. Wagon axles", next: new StoreState()},
+	{text: "6. Wagon tongues", next: new StoreState()},
+	{text: "7. Food", next: new StoreState()},
+	{text: "8. Leave store", onclick: () => { states.pop() }}
+
+])
 
 let changeFoodState = new ContinueState("Choose the food ration size:")
 
@@ -33,10 +45,11 @@ let gameMenu = new MenuState("What would you like to do?", [
 	{text: "Talk to people", onclick: () => {
 		states.push(new ContinueState(randElem(conversations)))
 	}},
-	{text: "Buy Supplies", next: shopState, show: () => {
+	// updated
+	{text: "Buy Supplies", next: openStoreState} 
 		// TODO: Only show if near a shop/fort
-		return false
-	}},
+		//return false
+	,
 	{text: "Go Hunting", next: huntState, show: () => {
 		// Only show if in the wild (not near a fort or landmark)
 		return false
